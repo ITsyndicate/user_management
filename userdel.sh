@@ -20,6 +20,7 @@ for serv in $(cat ipfile.txt); do
 		exit 1
 	fi
 	ssh -q $serv /usr/sbin/userdel -rf $USERNAME
-	ssh -q $serv 'sed -i "/'${USERNAME}'/d" /etc/sudoers'
+	ssh -q $serv 'sed -i "/'^${USERNAME}'/d" /etc/sudoers'
+	ssh -q $serv 'sed -i "/'^Defaults:${USERNAME}'/d" /etc/sudoers'
 	echo 'Done'
 done
